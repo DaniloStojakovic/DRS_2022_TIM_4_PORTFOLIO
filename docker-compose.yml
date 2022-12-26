@@ -9,10 +9,10 @@ services:
     environment:
       FLASK_DEBUG: development
   web:
-    build: ./client/my-app
+    build: ./client
     ports:
       - "3000:3000"
     volumes:
-      - ./client/my-app:/user/src/app
+      - ./client:/user/src/app
     depends_on:
       - server
