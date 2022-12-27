@@ -1,1 +1,4 @@
 FLASK==2.2.2
+Flask-RESTful==0.3.8
+Flask-SQLAlchemy==2.5.1
+SQLAlchemy==1.3.18
