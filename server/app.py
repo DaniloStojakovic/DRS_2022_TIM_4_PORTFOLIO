@@ -1,33 +1,37 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify
+import pymongo
+from pymongo import MongoClient
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+def get_db():
+    client = MongoClient(host='test_mongodb',
+                         port=27017, 
+                         username='root', 
+                         password='pass',
+                        authSource="admin")
+    db = client["animal_db"]
+    return db
 
-class User(db.Model):
-    ime = db.Column("ime", db.String(100))
-    mail = db.Column("mail", db.String(100), primary_key=True)
-    adresa = db.Column("adresa", db.String(100))
+@app.route('/')
+def ping_server():
+    return "Welcome to K!@()_DK@!(D)K!@)(DK)."
 
-    def __repr__(self):
-        return "hello wolrd"
+@app.route('/animals')
+def get_stored_animals():
+    db = get_db()
+    _animals = db.animal_tb.find()
+    animals = [{"id": animal["id"], "name": animal["name"], "type": animal["type"]} for animal in _animals]
+    return jsonify({"animals": animals})
 
-    def __init__(self, ime, mail, adresa):
-        self.ime = ime
-        self.mail = mail
-        self.adresa = adresa
-
-db.create_all()
 
 @app.route('/api', methods=['GET'])
 def index():
     return {
-        "channel": "The Show",
-        "tutorial": "React, Flask and Docker"
+        "channel": "The qwodpk",
+        "tutorial": "qwdd, Flask and Docker"
     }
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
