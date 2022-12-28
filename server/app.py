@@ -1,4 +1,5 @@
 from flask import Flask
+import User
 
 app = Flask(__name__)
 
