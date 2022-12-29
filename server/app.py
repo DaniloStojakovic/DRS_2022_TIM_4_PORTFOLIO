@@ -3,7 +3,7 @@ import pymongo
 from pymongo import MongoClient
 
 app = Flask(__name__)
-
+"""
 def get_db():
     client = MongoClient(host='test_mongodb',
                          port=27017, 
@@ -15,7 +15,7 @@ def get_db():
 
 @app.route('/')
 def ping_server():
-    return "Welcome to K!@()_DK@!(D)K!@)(DK)."
+    return "Welcome to baza"
 
 @app.route('/animals')
 def get_stored_animals():
@@ -24,12 +24,12 @@ def get_stored_animals():
     animals = [{"id": animal["id"], "name": animal["name"], "type": animal["type"]} for animal in _animals]
     return jsonify({"animals": animals})
 
-
+"""
 @app.route('/api', methods=['GET'])
 def index():
     return {
-        "channel": "The qwodpk",
-        "tutorial": "qwdd, Flask and Docker"
+        "channel": "front",
+        "tutorial": "front"
     }
 
 
