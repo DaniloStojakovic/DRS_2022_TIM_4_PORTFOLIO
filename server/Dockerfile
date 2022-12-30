@@ -1,7 +1,5 @@
 FROM python:3
 
-ADD . /app
-
 WORKDIR /app
 
 ENV FLASK_APP=app.py
