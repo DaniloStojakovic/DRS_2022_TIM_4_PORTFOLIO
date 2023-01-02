@@ -1,5 +1,6 @@
 from flask import Flask
 import User
+from database import db
 
 app = Flask(__name__)
 
@@ -9,6 +10,10 @@ def index():
         "channel": "The Show",
         "tutorial": "React, Flask and Docker"
     }
+
+
+userCollectionn = db["users"]
+transactionCollection = db["trasactions"]
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
