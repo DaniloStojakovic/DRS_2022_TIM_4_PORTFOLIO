@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: black;
   min-height: 100vh;
   color:white;
   padding: 20px;
@@ -8,15 +8,18 @@
 
 
 @media (prefers-reduced-motion: no-preference) {
-  .registration{
+  /*().registration{
+    color: red;
     float:right;
     width:50%;
     text-align: right;
   }
 
   .login{
+    color: cyan;
     float:left;
     width: 50%;
     text-align: left;
   }
+  */
 }
