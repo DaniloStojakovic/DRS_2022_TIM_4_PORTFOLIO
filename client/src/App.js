@@ -1,12 +1,9 @@
 import './App.css';
 import {useState, useEffect} from 'react';
 import { Channel } from './Components/Channel/Channel'
-<<<<<<< Updated upstream
-=======
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Header from './Components/Header';
->>>>>>> Stashed changes
 
 function App() {
 
