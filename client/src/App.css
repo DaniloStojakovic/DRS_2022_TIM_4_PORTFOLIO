@@ -1,8 +1,12 @@
 .App {
   text-align: center;
+<<<<<<< Updated upstream
   background-color: #282c34;
+=======
+  background-color: #460C68;
+>>>>>>> Stashed changes
   min-height: 100vh;
-  color:white;
+  color:#F56EB3;
   padding: 20px;
 }
 

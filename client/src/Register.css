@@ -1,0 +1,8 @@
+.register{
+    text-align: right;
+    /*background-color:grey;*/
+    min-height: 100vh;
+    color:#F56EB3;
+    padding: 20px;
+    float:right;
+}
