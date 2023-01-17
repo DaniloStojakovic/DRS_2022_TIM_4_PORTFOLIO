@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import '../Register.css';
+import axios from 'axios'
 
 
 
@@ -10,10 +11,19 @@ function Register(){
     const [usernameReg, setUsernameReg] = useState("");
     const [passwordReg, setPasswrodReg] = useState("");
 
+    const register=e=>{
+            
+        e.preventDefault();
+            return axios.post(`http://localhost:5000/register`) 
+                .then(res=>alert(res)) 
+        
+    }
+
+
     return(
-        <div className="register">
-            <h1>Registration</h1>
+        <div>            <h1>Registration</h1>
             <label>Username:</label>
+            <form onSubmit={register}>
             <input 
                 type="text" 
                 onChange={(e) => {
@@ -42,8 +52,11 @@ function Register(){
                 setPasswrodReg(e.target.value);
                 }}/>
             <br></br>
-            <button>Register</button>
-        </div>
+            <input type={"submit"} name='registruj' value={"Register"}></input>
+            <br/>
+            </form>
+            </div>
+
     )
 }
 

@@ -10,7 +10,7 @@ const login1 = () => {
     inputPassword: document.getElementById('inputPassword').value
   })
   console.log(data );
-  axios.post('http://localhost:5000/login', data,
+  axios.post('http://localhost:5000/api/login', data,
   {
   headers:{
     'Accept': 'application/json, text/plain, /',
