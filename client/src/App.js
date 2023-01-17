@@ -10,14 +10,31 @@ function App() {
 
   const [initialState, setState] = useState([])
   const url = '/api'
+/*
+  fetch('/registser', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: "John", email: "john@example.com" })
+  })
+  .then(response => response.text())
+  .then(data => console.log(data))
+  .catch(error => console.error(error))
 
-  useEffect(()=>{
-    fetch(url).then(response => {
-      if(response.status === 200){
-        return response.json()
-      }
-    }).then(data => setState(data))
-  }, [])
+*/
+
+useEffect(()=>{
+  fetch(url,{
+    'methods':'GET',
+    headers : {
+      'Content-Type':'application/json'
+    }
+  })
+  .then(response => response.json())
+  .catch(error => console.log(error))
+
+},[])
 /*
   return (
     <div className="App">

@@ -1,50 +1,115 @@
-import React from 'react';
-import {useState, useEffect} from 'react';
-import '../Register.css';
 
+import React,{useRef,useState} from "react";
+import * as ReactDOMClient from 'react-dom/client';
+import useForm from "../Components/useForm";
+import axios from 'axios'
 
+export const BASE_URL="https://localhost:44386/";
 
+const getFreshModelObject=()=>({
+    username:'',
+    password:'',
+    name:'',
+    lastname:'',
+    uloga:'',
+    korisnik:''
+})
 
-function Register(){
+export default function Register(props){
+    const {
+        values,
+        setValues,
+        errors,
+        setErrors,
+        handleInputChanges
+    } = useForm(getFreshModelObject)
 
-    const [usernameReg, setUsernameReg] = useState("");
-    const [passwordReg, setPasswrodReg] = useState("");
+    const [alertMessage,setAlert]=useState(<div></div>);
+
+    const uloga=useRef();
+
+        const register=e=>{
+            
+            e.preventDefault();
+            if(validate()){
+                values.uloga=uloga.current.value;
+                const container = document.getElementById('root');
+                const root = ReactDOMClient.createRoot(container);
+                values.korisnik=props.username;
+               
+                const requestConfig = {
+                    url: 'http://localhost:5000/register',
+                    method: "POST",
+                    body: JSON.stringify({
+                      username:values.username
+            
+            
+            
+                    }
+                    )
+            
+            
+                  };
+             
+            }
+        }
+
+        let usernameError = "";
+        let passwordError = "";
+        let nameError="";
+        let lastnameError="";
+
+        const validate=()=>{
+            
+            if (!values.username) {
+                usernameError = "Username field is required";
+                alert(usernameError)
+            }
+            
+            if (!values.password) {
+                passwordError = "Password field is required";
+                alert(passwordError)
+            }
+
+            if (!values.name) {
+                nameError = "Name field is required";
+                alert(nameError)
+            }
+
+            if (!values.lastname) {
+                lastnameError = "Lastname field is required";
+                alert(lastnameError)
+            }
+
+            if (nameError || passwordError || usernameError || lastnameError) {
+                return false;
+            }
+            return true;
+        }
+
 
     return(
-        <div className="register">
-            <h1>Registration</h1>
-            <label>Username:</label>
-            <input 
-                type="text" 
-                onChange={(e) => {
-                setUsernameReg(e.target.value);
-                }}/>
-            <br></br>
-            <label>Surname: </label>
-            <input type="text" />
-            <br></br>
-            <label>Address: </label>
-            <input type="text" />
-            <br></br>
-            <label>State: </label>
-            <input type="text" />
-            <br></br>
-            <label>Telephone number: </label>
-            <input type="text" />
-            <br></br>
-            <label>Email: </label>
-            <input type="text" />
-            <br></br>
-            <label>Password: </label>
-            <input 
-                type="text" 
-                onChange={(e) => {
-                setPasswrodReg(e.target.value);
-                }}/>
-            <br></br>
-            <button>Register</button>
+        <div class="jumbotron text-center">
+            <h3>Register new user:</h3><br/><br/>
+        <form onSubmit={register}> 
+            Username : <input type={"text"} name='username' value={values.username} onChange={handleInputChanges}  ></input><br/><br/>
+            
+            Password: <input type={"password"} name='password' value={values.password} onChange={handleInputChanges}></input><br/><br/>
+            
+            Name : <input type={"text"} name='name' value={values.name} onChange={handleInputChanges}  ></input><br/><br/>
+
+            Lastname : <input type={"text"} name='lastname' value={values.lastname} onChange={handleInputChanges}  ></input><br/><br/>
+
+            Role : <select ref={uloga} >
+                <option value={'ADMIN'}>ADMIN</option>
+                <option value={'KORISNIK'}>KORISNIK</option>
+            </select><br/><br/>
+
+            <input type={"submit"} name='registruj' value={"Register"} onChange={handleInputChanges}></input><br/>
+        </form>
+        <br/>
+        {alertMessage}
         </div>
     )
+       
 }
-
-export default Register
