@@ -1,8 +1,13 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 import User
 from database import db
+from flask_cors import CORS
+
+
 
 app = Flask(__name__)
+
+CORS(app)
 
 @app.route('/api', methods=['GET'])
 def index():
@@ -10,6 +15,21 @@ def index():
         "channel": "The Show",
         "tutorial": "React, Flask and Docker"
     }
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    name = request.json["inputUsername"]
+    password = request.json["inputPassword"]
+    #user = userCollectionn.find_one({"name": name, "password": password})
+    if user:
+        #login successful
+    #    db.users.insert_one({"email": name, "password": password})
+        return jsonify({"message": "Login Successful"})
+    else:
+        #login failed
+        return jsonify({"message": "Login Failed"})
+
 
 
 userCollectionn = db["users"]
