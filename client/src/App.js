@@ -10,13 +10,27 @@ function App() {
   const [initialState, setState] = useState([])
   const url = '/api'
 
-  useEffect(()=>{
-    fetch(url).then(response => {
-      if(response.status === 200){
-        return response.json()
-      }
-    }).then(data => setState(data))
+/*useEffect(()=>{                                    /  / _____     __          __     _____ \  \
+    fetch(url).then(response => {                   |   \/     \___/              \___/     \/   |
+      if(response.status === 200){                  \                                            / 
+        return response.json()                       \____________(   .   )(   .   )____________/
+      }                                                           \      _|_       /
+    }).then(data => setState(data))                                \     _|_      / 
   }, [])
+ */
+  
+  useEffect(()=>{
+    fetch(url,{
+      'methods':'GET',
+      headers : {
+        'Content-Type':'application/json'
+      }
+    })
+    .then(response => response.json())
+    .catch(error => console.log(error))
+
+  },[])
+
 /*
   return (
     <div className="App">
