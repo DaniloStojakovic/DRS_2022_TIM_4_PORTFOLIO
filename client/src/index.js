@@ -3,11 +3,38 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import UserPortfolio from './Pages/UserPortfolio';
+import UserModify from './Pages/UserModify';
+import CryptoStore from './Pages/CryptoStore';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>,
+  },
+  {
+    path: "UserPortfolio",
+    element: <UserPortfolio/>,
+  },
+  {
+    path: "UserModify",
+    element: <UserModify/>,
+  },
+  {
+    path: "CryptoStore",
+    element: <CryptoStore/>,
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router ={router} />
   </React.StrictMode>
 );
 

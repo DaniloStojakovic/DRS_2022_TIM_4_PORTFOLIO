@@ -2,11 +2,11 @@
     border: 1px solid black;
     max-width:none;    
     text-align: center;
-    background-color: grey;
+    background-color: #8D72E1;
+    color: #B9E0FF;
     display: flex;
     justify-content: space-between;
     align-items:center;
-    background-color: grey;
     line-height: 30px;
 
     position: fixed;
