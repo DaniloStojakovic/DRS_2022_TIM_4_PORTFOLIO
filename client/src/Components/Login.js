@@ -38,7 +38,7 @@ function Login() {
   }
   if(usernameReg=="nela"){
     const root1 = ReactDOM.createRoot(document.getElementById('root'));
-  root1.render(<UserPortfolio/>
+  root1.render(<NavBar/>
   );
   }
   

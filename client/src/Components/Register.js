@@ -2,76 +2,82 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import '../Register.css';
 import axios from 'axios'
+import ReactDOM from 'react-dom/client';
 
 
-axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-
-function Register(){
-
-    const [usernameReg, setUsernameReg] = useState("");
-    const [passwordReg, setPasswrodReg] = useState("");
-
-    const register=e=>{
-            
-        e.preventDefault();
-            return axios.post('http://localhost:80/register',
-            {
-                headers:
-                {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => {
-              console.log(response);
-            })
-            .catch(error => {
-              console.log(error);
-            }); 
-        
-    }
-
-
-    return(
-        <div>            <h1>Registration</h1>
+function Register() {
+  const [usernameReg, setUsernameReg] = useState("");
+  const register1 = (event) => {
+    event.preventDefault();
+    let data = ({
+      inputUsername: document.getElementById('inputUsername').value,
+      inputSurname: document.getElementById('inputSurname').value,
+      inputAddress: document.getElementById('inputAddress').value,
+      inputState: document.getElementById('inputState').value,
+      inputNumber: document.getElementById('inputNumber').value,
+      inputEmail: document.getElementById('inputEmail').value,
+      inputPassword: document.getElementById('inputPassword').value
+    })
+    console.log(data );
+    axios.post('http://localhost:5050/register', data,
+    {
+    headers:{
+      'Accept': 'application/json, text/plain, /',
+      'Content-Type': 'application/json'
+    }})
+    .then(response => 
+        // Handle successful response
+        alert(response),setUsernameReg("nela")
+    )
+    .catch(error => {
+        // Handle error
+    });
+  
+  }
+  if(usernameReg=="nela"){
+    const root1 = ReactDOM.createRoot(document.getElementById('root'));
+  root1.render(<Register/>
+  );
+  }
+  
+    return (
+        <div><h1>Registration</h1>
+            <form>
             <label>Username:</label>
-            <form onSubmit={register}>
             <input 
+                id='inputUsername'
+                name='inputUsername'
                 type="text" 
                 onChange={(e) => {
                 setUsernameReg(e.target.value);
                 }}/>
             <br></br>
             <label>Surname: </label>
-            <input id='inputUsername' name='inputUsername' type="text" />
+            <input id='inputSurname' name='inputSurname' type="text" />
             <br></br>
             <label>Address: </label>
-            <input type="text" />
+            <input id='inputAddress' name='inputAddresss' type="text" />
             <br></br>
             <label>State: </label>
-            <input type="text" />
+            <input id='inputState' name='inputState' type="text" />
             <br></br>
             <label>Telephone number: </label>
-            <input type="text" />
+            <input id='inputNumber' name='inputNumber' type="text" />
             <br></br>
             <label>Email: </label>
-            <input type="text" />
+            <input id='inputEmail' name='inputEmail' type="text" />
             <br></br>
             <label>Password: </label>
             <input 
                 id='inputPassword'
                 name='inputPassword'
-                type="text" 
-                onChange={(e) => {
-                setPasswrodReg(e.target.value);
-                }}/>
+                type="text"/>
             <br></br>
-            <input type={"submit"} name='registruj' value={"Register"}></input>
+            <button type='submit' onClick={register1}>Register</button>
             <br/>
             </form>
             </div>
-
     )
-}
-
+  }
 export default Register
