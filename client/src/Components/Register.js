@@ -14,8 +14,13 @@ function Register(){
     const register=e=>{
             
         e.preventDefault();
-            return axios.post(`http://localhost:5000/register`) 
-                .then(res=>alert(res)) 
+            return axios.post('http://localhost:80/register')
+            .then(response => {
+              console.log(response);
+            })
+            .catch(error => {
+              console.log(error);
+            }); 
         
     }
 
