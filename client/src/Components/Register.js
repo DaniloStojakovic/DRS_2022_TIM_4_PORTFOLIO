@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import '../Register.css';
 import axios from 'axios'
 import ReactDOM from 'react-dom/client';
+import UserPortfolio from '../Pages/UserPortfolio';
 
 
 
@@ -37,7 +38,7 @@ function Register() {
   }
   if(usernameReg=="nela"){
     const root1 = ReactDOM.createRoot(document.getElementById('root'));
-  root1.render(<Register/>
+  root1.render(<UserPortfolio/>
   );
   }
   
