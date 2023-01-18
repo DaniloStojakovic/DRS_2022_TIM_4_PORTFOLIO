@@ -4,6 +4,7 @@ import '../Register.css';
 import axios from 'axios'
 
 
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 
 function Register(){
@@ -14,7 +15,13 @@ function Register(){
     const register=e=>{
             
         e.preventDefault();
-            return axios.post('http://localhost:80/register')
+            return axios.post('http://localhost:80/register',
+            {
+                headers:
+                {
+                    'Content-Type': 'application/json',
+                }
+            })
             .then(response => {
               console.log(response);
             })
@@ -36,7 +43,7 @@ function Register(){
                 }}/>
             <br></br>
             <label>Surname: </label>
-            <input type="text" />
+            <input id='inputUsername' name='inputUsername' type="text" />
             <br></br>
             <label>Address: </label>
             <input type="text" />
@@ -52,6 +59,8 @@ function Register(){
             <br></br>
             <label>Password: </label>
             <input 
+                id='inputPassword'
+                name='inputPassword'
                 type="text" 
                 onChange={(e) => {
                 setPasswrodReg(e.target.value);

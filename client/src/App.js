@@ -12,9 +12,7 @@ function App() {
   const url = '/api'
 
 
-axios.get('http://localhost:80/')
-  .then(response => console.log(response.data))
-  .catch(error => console.log(error))
+
 
 
 

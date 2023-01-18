@@ -10,9 +10,9 @@ function NavBar() {
 
     return (
     <div className="navbar">
-        <a href="/UserPortfolio" className="brand-name">
+        <p className="brand-name">
             Blockchain Bonanza
-        </a>
+        </p>
         <div className="navigation-menu">
             <ul>
                 <li>
