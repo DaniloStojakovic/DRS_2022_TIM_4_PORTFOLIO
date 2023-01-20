@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block content %}
+{% set active_link = price %}
+{% set active_link_3 =  volume_change_24h %}
+{% set active_link_4 =  percent_change_24h %}
+{% set active_link_5 =  percent_change_7d %}
+{% set active_link_2 = percent_change_1h %}
+<center>
+<button type="submit" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Purchase Coin</button><br><br>
+{% if active_link_3 >= 0 %}
+<h5 style="padding-left: -20%;">volume_24h: <span style="color: green;">{{'%0.2f' | format(volume_24h|float)}}</span></h5>
+<h5 style="padding-left: -20%;">volume_change_24h: <span style="color: green;">{{'%0.2f' | format(volume_change_24h|float)}}%</span></h5>
+{% else %}
+<h5 style="padding-left: -20%;">volume_24h: <span style="color: red;">{{'%0.2f' | format(volume_24h|float)}}</span></h5>
+<h5 style="padding-left: -20%;">volume_change_24h: <span style="color: red;">{{'%0.2f' | format(volume_change_24h|float)}}%</span></h5>
+{% endif %}
+<h2 style="padding-left: -20%;">{{name}}</h1>
+<h2 style="padding-left: -20%;">{{symbol}}</h2>
+{% if active_link >= 1 %}
+<h2 style="padding-left: -20%;">${{'%0.2f' | format(price|float)}}</h2>
+{% else %}
+<h2 style="padding-left: -20%;">${{'%0.6f' | format(price|float)}}</h2>
+{% endif %}
+{% if active_link_2 >= 0 %}
+<h2 style="color: green;"><img src="{{url_for('static',filename='up.png')}}" alt="up">{{'%0.3f' | format(percent_change_1h)}}%</h2></center>
+{% else %}
+<h2 style="color: red;"><img src="{{url_for('static',filename='down.png')}}" alt="down">{{'%0.3f' | format(percent_change_1h)}}%</h2></center>
+{% endif %}
+<center><h1 style="padding-top: 5%">More Information</h1>
+<h2>Market Pairs <br>{{num_market_pairs}}</h2>
+<h2>Circulate Supplies <br>{{circulating_supply}}</h2>
+<h2>Total Supplies <br>{{(total_supply)}}</h2>
+{% if max_supply=='None' %}
+<h2>Max Supplies <br>Not defined</h2>
+<br>
+{% else %}
+<h2>Max Supplies <br>{{max_supply}}</h2>
+<br>
+{% endif %}
+{% if active_link_4 >= 0 %}
+<h2>Percent Change 24h <br><span style="color:green;"><img src="{{url_for('static',filename='up.png')}}" alt="up">{{'%0.3f' | format(percent_change_24h|float)}}%</span></h2>
+{% else %}
+<h2>Percent Change 24h <br><span style="color:red;"><img src="{{url_for('static',filename='down.png')}}" alt="up">{{'%0.3f' | format(percent_change_24h|float)}}%</span></h2>
+{% endif %}
+{% if active_link_5 >= 0 %}
+<h2>Percent Change 7d <br><span style="color:green;"><img src="{{url_for('static',filename='up.png')}}" alt="up">{{'%0.3f' | format(percent_change_7d|float)}}%</span></h2>
+<br>
+{% else %}
+<h2>Percent Change 7d <br><span style="color:red;"><img src="{{url_for('static',filename='down.png')}}" alt="up">{{'%0.3f' | format(percent_change_7d|float)}}%</span></h2>
+<br>
+{% endif %}
+<h2>Market Cap <br>{{'%0.0f' | format(market_cap|float)}}</h2>
+<h2>Market Cap Dominance <br>{{'%0.2f' | format(market_cap_dominance|float)}}</h2>
+<h2>Diluted Market Cap <br>{{'%0.2f' | format(fully_diluted_market_cap)}}</h2>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModal">Purchase Coin</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/purchase" method="post">
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Coin</label>
+              <input type="text" class="form-control" id="recipient-name" name="coin" value="{{name}}">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Price</label>
+              <input type="text" class="form-control" id="recipient-name" name="price" value="{{'%0.2f' | format(price|float)}}">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Quantity</label>
+              <input type="number" class="form-control" id="recipient-name" name="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Date and Time</label>
+                <input type="datetime" class="form-control" id="datetime" name="date">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" onclick="myFunction()">Confirm</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script>
+    var d = moment();
+    document.getElementById("datetime").value = d.format("MM/DD/YYYY HH:mm:ss");
+  </script>
+      <script>
+        function myFunction() {
+          alert("Purchase Successfully ");
+        }
+      </script>
+  {% endblock %}
